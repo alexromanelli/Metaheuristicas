@@ -73,7 +73,8 @@ public class CaixeiroViajante {
     private static int[] resolverCaixeiroViajante(int n, int[][] distancia) {
         int[] solucao = new int[n];
         
-        gerarSolucaoAleatoria(n, solucao, distancia);
+        //gerarSolucaoAleatoria(n, solucao, distancia);
+        gerarSolucaoGulosa(n, solucao, distancia, HeuristicaConstrutiva.VizinhoMaisProximo);
         
         return solucao;
     }
@@ -105,4 +106,50 @@ public class CaixeiroViajante {
         }
     }
     
+    enum HeuristicaConstrutiva {
+        VizinhoMaisProximo,
+        InsercaoMaisBarata
+    }
+    
+    private static void gerarSolucaoGulosa(int n, int[] solucao, 
+            int[][] distancia, HeuristicaConstrutiva heuristica) {
+        boolean[] visitado = new boolean[n];
+        int indiceUltimaCidadeVisitada = -1;
+        for (int i = 0; i < n; i++) {
+            int indiceCidadeEscolhida = -1;
+            switch (heuristica) {
+                case VizinhoMaisProximo:
+                    if (i == 0) {
+                        indiceCidadeEscolhida = 0;
+                    } else {
+                        indiceCidadeEscolhida = 
+                                obterCidadeMaisProximaNaoVisitada(indiceUltimaCidadeVisitada,
+                                        n, distancia, visitado);
+                    }
+                    break;
+                case InsercaoMaisBarata:
+                    break;
+            }
+            solucao[i] = indiceCidadeEscolhida;
+            visitado[indiceCidadeEscolhida] = true;
+            indiceUltimaCidadeVisitada = indiceCidadeEscolhida;
+        }
+    }
+    
+    private static int obterCidadeMaisProximaNaoVisitada(int indiceCidadeOrigem,
+            int n, int[][] distancia, boolean[] visitado) {
+        int indiceProximaCidade = -1;
+        int menorDistancia = Integer.MAX_VALUE;
+        
+        for (int i = 0; i < n; i++) {
+            if (!visitado[i]) {
+                if (distancia[indiceCidadeOrigem][i] < menorDistancia) {
+                    indiceProximaCidade = i;
+                    menorDistancia = distancia[indiceCidadeOrigem][i];
+                }
+            }
+        }
+        
+        return indiceProximaCidade;
+    }
 }
