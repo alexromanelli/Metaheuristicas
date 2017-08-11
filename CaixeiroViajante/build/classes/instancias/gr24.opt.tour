@@ -6,3 +6,31 @@ TOUR_SECTION
 16 11 3 7 6 24 8 21 5 10 17 22 18 19 15 2 20 14 13 9 23 4 12 1
 -1
 EOF
+----------------------------
+
+Solução encontrada:
+14, 23, 4, 12, 1, 16, 11, 3, 7, 6, 24, 8, 21, 5, 10, 17, 18, 22, 19, 15, 2, 20, 9, 13
+Custo da solução..: 1394
+
+Solução encontrada:
+14, 9, 23, 4, 12, 1, 16, 11, 3, 7, 6, 24, 8, 21, 5, 10, 17, 18, 22, 19, 15, 2, 20, 13
+Custo da solução..: 1437
+
+Número de vizinhos: 504
+
+Nao foi encontrada melhoria nesta vizinhança.
+
+Soluçao otima local com estrutura de vizinhança 2-OPT:
+
+Solução encontrada:
+20, 2, 15, 19, 22, 18, 17, 10, 5, 21, 8, 24, 6, 7, 3, 11, 16, 1, 12, 4, 23, 9, 13, 14
+Custo da solução..: 1272
+
+Total de iteraçoes da busca local: 15
+
+
+Solução encontrada:
+20, 2, 15, 19, 22, 18, 17, 10, 5, 21, 8, 24, 6, 7, 3, 11, 16, 1, 12, 4, 23, 9, 13, 14
+Custo da solução..: 1272
+
+Total de soluçoes avaliadas: 7560
