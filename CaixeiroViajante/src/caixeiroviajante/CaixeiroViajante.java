@@ -241,6 +241,12 @@ public class CaixeiroViajante {
         VizinhoMaisProximo,
         InsercaoMaisBarata
     }
+    
+    private static void gerarSolucaoGulosaAleatoria(int n, int[] solucao,
+            int[][] distancia, HeuristicaConstrutiva heuristica,
+            double taxaDeAleatoriedade) {
+        // implementar o método como sugerido no GRASP
+    }
 
     private static void gerarSolucaoGulosa(int n, int[] solucao,
             int[][] distancia, HeuristicaConstrutiva heuristica) {
