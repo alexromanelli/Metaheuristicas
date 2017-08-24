@@ -254,10 +254,96 @@ public class CaixeiroViajante {
 //        executarBuscaLocalHillClimbing(n, solucao, solucaoBusca, solucaoMelhor,
 //                distancia, opcaoAprimorante);
 
-        executarGRASP(30, solucaoGlobal, n, solucao, solucaoBusca, solucaoMelhor, 
-                distancia, opcaoAprimorante);
+//        executarGRASP(30, solucaoGlobal, n, solucao, solucaoBusca, solucaoMelhor, 
+//                distancia, opcaoAprimorante);
+
+        executarILS(solucaoGlobal, n, solucao, solucaoBusca, solucaoMelhor, distancia, opcaoAprimorante);
 
         return solucaoGlobal;
+    }
+    
+    private static void executarILS(int[] solucaoILS,
+            int n, int[] solucao, int[] solucaoBusca, int[] solucaoMelhor, 
+            int[][] distancia, char opcaoAprimorante) {
+        gerarSolucaoGulosa(n, solucao, distancia, 
+                HeuristicaConstrutiva.VizinhoMaisProximo);
+        totalSolucoesAvaliadas++;
+        imprimirSolucao(TipoSolucao.SolucaoInicial, n, 
+                solucao, distancia);
+        executarBuscaLocalHillClimbing(n, solucao, solucaoBusca, 
+                solucaoILS, distancia, opcaoAprimorante);
+        imprimirSolucao(TipoSolucao.MelhorSolucaoLocal, n, 
+                solucaoILS, distancia);
+        imprimirSolucao(TipoSolucao.MelhorSolucaoGlobal, n, 
+                solucaoILS, distancia);
+        
+        int iteracoesSemMelhoria = 0;
+        int quantidadeIteracoes = 0;
+        do {
+            efetuarPerturbacao(n, solucao, solucaoILS, iteracoesSemMelhoria);
+            imprimirSolucao(TipoSolucao.SolucaoInicial, n, 
+                    solucao, distancia);
+            executarBuscaLocalHillClimbing(n, solucao, solucaoBusca, 
+                    solucaoMelhor, distancia, opcaoAprimorante);
+            imprimirSolucao(TipoSolucao.MelhorSolucaoLocal, n, 
+                    solucaoMelhor, distancia);
+            
+            if (calcularCustoSolucao(n, solucaoMelhor, distancia) < 
+                    calcularCustoSolucao(n, solucaoILS, distancia)) {
+                System.arraycopy(solucaoMelhor, 0, solucaoILS, 0, n);
+                imprimirSolucao(TipoSolucao.MelhorSolucaoGlobal, n, 
+                        solucaoILS, distancia);
+                iteracoesSemMelhoria = 0;
+            } else {
+                iteracoesSemMelhoria++;
+            }
+            quantidadeIteracoes++;
+            imprimirQuantidadeIteracoesBuscaMetaheuristica(quantidadeIteracoes + 1);
+            imprimirQuantidadeSolucoesGeradasMetaheuristica(totalSolucoesAvaliadas);
+        } while (iteracoesSemMelhoria < MAX_ITERACOES_SEM_MELHORIA);
+    }
+    
+    private static final int MAX_ITERACOES_SEM_MELHORIA = 30;
+    private static int[][] perturbacoes = new int[MAX_ITERACOES_SEM_MELHORIA][3];
+    
+    private static void efetuarPerturbacao(int n, int[] solucaoPerturbada,
+            int[] solucaoBase, int indicePerturbacao) {
+        Random r = new Random(Calendar.getInstance().getTimeInMillis());
+        
+        int pos1 = 0, pos2 = 0, pos3 = 0;
+        boolean valido = true;
+        do {
+            pos1 = r.nextInt(n);
+            
+            while (pos2 == pos1) {
+                pos2 = r.nextInt(n);
+            }
+            
+            while (pos3 == pos1 || pos3 == pos2) {
+                pos3 = r.nextInt(n);
+            }
+            
+            valido = true;
+            for (int i = 0; i < indicePerturbacao; i++) {
+                if (pos1 == perturbacoes[i][0] &&
+                        pos2 == perturbacoes[i][1] &&
+                        pos3 == perturbacoes[i][2]) {
+                    valido = false;
+                    break;
+                }
+            }
+            if (valido) {
+                perturbacoes[indicePerturbacao][0] = pos1;
+                perturbacoes[indicePerturbacao][1] = pos2;
+                perturbacoes[indicePerturbacao][2] = pos3;
+
+                System.arraycopy(solucaoBase, 0, solucaoPerturbada, 0, n);
+                int temp = solucaoPerturbada[pos3];
+                solucaoPerturbada[pos3] = solucaoPerturbada[pos2];
+                solucaoPerturbada[pos2] = solucaoPerturbada[pos1];
+                solucaoPerturbada[pos1] = temp;
+            }
+        } while (!valido);
     }
     
     private static void executarGRASP(int quantidadeIteracoes,
