@@ -6,6 +6,7 @@ package caixeiroviajante;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -91,16 +92,21 @@ public class CaixeiroViajante {
         if (args.length >= 6)
             taxaAleatoriedade = Integer.parseInt(args[5]) / 100.0;
         
+        long tempoInicial = System.nanoTime();
         solucao = resolverCaixeiroViajante(n, distancia, opcaoConstrutivo, 
                     opcaoAprimorante, opcaoMetaheuristica, iteracoes,
                     taxaAleatoriedade);
+        long tempoFinal = System.nanoTime();
 
         // imprimir resultado
         if (imprimirAcompanhamento)
             InterfaceTerminal.imprimirSolucao(TipoSolucao.MelhorSolucaoGlobal, n, solucao, distancia);
         else {
+            System.out.println();
             InterfaceTerminal.imprimirSolucaoSimples(n, solucao, distancia);
-            System.out.printf("\nQuantidade de soluções avaliadas: %d\n\n", totalSolucoesAvaliadas);
+            DecimalFormat df = new DecimalFormat("###,###,###,##0");
+            System.out.printf("\nQuantidade de soluções avaliadas: %15s\n", df.format(totalSolucoesAvaliadas));
+            System.out.printf("\nTempo de execução...............: %15.3f s\n\n", (tempoFinal - tempoInicial) / 1000000000.0);
         }
     }
 
