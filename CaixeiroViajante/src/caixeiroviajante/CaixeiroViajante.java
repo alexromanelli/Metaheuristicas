@@ -104,10 +104,10 @@ public class CaixeiroViajante {
         else {
             System.out.println();
             InterfaceTerminal.imprimirSolucaoSimples(n, solucao, distancia);
-            DecimalFormat df = new DecimalFormat("###,###,###,##0");
-            System.out.printf("\nQuantidade de soluções avaliadas: %15s\n", df.format(totalSolucoesAvaliadas));
-            System.out.printf("\nTempo de execução...............: %15.3f s\n\n", (tempoFinal - tempoInicial) / 1000000000.0);
         }
+        DecimalFormat df = new DecimalFormat("###,###,###,##0");
+        System.out.printf("\nQuantidade de soluções avaliadas: %15s\n", df.format(totalSolucoesAvaliadas));
+        System.out.printf("\nTempo de execução...............: %15.3f s\n\n", (tempoFinal - tempoInicial) / 1000000000.0);
     }
 
     private static void obterListaDeVizinhosNaoVisitadosOrdenadaPorProximidade(int[] listaCandidatos, int origem, int[][] distancia, boolean[] visitado) {

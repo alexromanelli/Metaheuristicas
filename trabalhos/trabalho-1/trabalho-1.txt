@@ -1,0 +1,15 @@
+Trabalho 1:
+-----------
+
+Seminário sobre métodos de busca meta-heurísticas:
+
+- Problemas de otimização combinatória;
+- Heurísticas construtivas;
+- Busca em vizinhança (estruturas de vizinhança) e busca local;
+- Meta-heurísticas baseadas em busca local:
+    - Iterated Local Search;
+    - Greedy Randomized Adaptative Search Procedure;
+    - Variable Neighbourhood Search.
+    
+    
+Data: 27 de setembro de 2017.
