@@ -69,26 +69,26 @@ public class InterfaceTerminal {
         gotoxy(5, 3);
         System.out.print("Op\u00e7ao de aprimoramento.: " + opcaoDeAprimoramento);
         gotoxy(7, 3);
-        System.out.print("Solu\u00e7ao inicial................:    |  custo = 00000000");
+        System.out.print("Solu\u00e7ao inicial................:    |  custo = 000000.0");
         gotoxy(14, 3);
         System.out.print("Solu\u00e7ao base da vizinhan\u00e7a.....:    |  custo = 00000000");
         gotoxy(21, 3);
-        System.out.print("Ultima solu\u00e7ao vizinha gerada..:    |  custo = 00000000  |  solu\u00e7oes vizinhas geradas: 000000");
+        System.out.print("Ultima solu\u00e7ao vizinha gerada..:    |  custo = 000000.0  |  solu\u00e7oes vizinhas geradas: 000000");
         gotoxy(28, 3);
         System.out.print("Melhor solu\u00e7ao desta vizinhan\u00e7a:    |  custo = 00000000");
         gotoxy(35, 3);
-        System.out.print("Melhor solu\u00e7ao local...........:    |  custo = 00000000  |  total de solu\u00e7oes BL.....: 000000  | itera\u00e7oes da busca local: 00000");
+        System.out.print("Melhor solu\u00e7ao local...........:    |  custo = 000000.0  |  total de solu\u00e7oes BL.....: 000000  | itera\u00e7oes da busca local: 00000");
         gotoxy(42, 3);
-        System.out.print("Melhor solu\u00e7ao global..........:    |  custo = 00000000  |  total de solu\u00e7oes geradas: 000000  | itera\u00e7oes...............: 00000");
+        System.out.print("Melhor solu\u00e7ao global..........:    |  custo = 000000.0  |  total de solu\u00e7oes geradas: 000000  | itera\u00e7oes...............: 00000");
         //System.out.print(totalSolucoesAvaliadas);
         for (int i = 0; i < 6; i++) {
             System.out.println();
         }
     }
     
-    public static void imprimirSolucaoSimples(int n, int[] solucao, int[][] distancia) {
-        int custo = CaixeiroViajante.calcularCustoSolucao(n, solucao, distancia);
-        DecimalFormat df = new DecimalFormat("00000000");
+    public static void imprimirSolucaoSimples(int n, int[] solucao, double[][] distancia) {
+        double custo = CaixeiroViajante.calcularCustoSolucao(n, solucao, distancia);
+        DecimalFormat df = new DecimalFormat("000000.0");
         System.out.println("Solução encontrada com custo " + df.format(custo) + ":");
         for (int i = 0; i < n; i++) {
             System.out.print((solucao[i] + 1) + (i < n - 1 ? ", " : ""));
@@ -96,7 +96,7 @@ public class InterfaceTerminal {
         System.out.println();
     }
 
-    public static void imprimirSolucao(CaixeiroViajante.TipoSolucao tipo, int n, int[] solucao, int[][] distancia) {
+    public static void imprimirSolucao(CaixeiroViajante.TipoSolucao tipo, int n, int[] solucao, double[][] distancia) {
         int linha = 0;
         int coluna = 0;
         switch (tipo) {
@@ -124,8 +124,8 @@ public class InterfaceTerminal {
             System.out.print((solucao[i] + 1) + (i < n - 1 ? ", " : ""));
         }
         gotoxy(linha - 2, 50);
-        int custo = CaixeiroViajante.calcularCustoSolucao(n, solucao, distancia);
-        DecimalFormat df = new DecimalFormat("00000000");
+        double custo = CaixeiroViajante.calcularCustoSolucao(n, solucao, distancia);
+        DecimalFormat df = new DecimalFormat("000000.0");
         System.out.print(df.format(custo));
         gotoxy(51, 0);
     }

@@ -3,12 +3,12 @@
  */
 package caixeiroviajante;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Random;
+import org.moeaframework.problem.tsplib.TSPInstance;
 
 /**
  *
@@ -21,81 +21,104 @@ public class CaixeiroViajante {
     private static boolean imprimirAcompanhamento = false;
 
     /**
-     * @param args the command line arguments
+     * @param args os argumentos da linha de comando, que são os seguintes:<br/>
+     *             <ol>
+     *               <li>nome do arquivo da instância</li>
+     *               <li>opção de meta-heurística (I: ILS; G: GRASP)</li>
+     *               <li>opção de método construtivo (P: Vizinho mais próximo; A: Aleatório)</li>
+     *               <li>opção de vizinhança (2: 2-Opt; I: Insertion; S: Swap)</li>
+     *               <li>opção da busca local (P: primeiro aprimorante; M: melhor aprimorante)</li>
+     *               <li>opção de acompanhamento pela interface (A: Imprimir acompanhamento; N: Não imprimir acompanhamento)</li>
+     *               <li>número de iterações (no GRASP, é a quantidade de soluções iniciais; no ILS, é a quantidade de iterações sem melhoria até parar)</li>
+     *               <li>taxa de aleatoriedade (usado no GRASP)</li>
+     *             </ol>
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-        // linha com: NAME: ...
-        input.readLine();
-        // linha com: TYPE: ...
-        input.readLine();
-        // linha com: COMMENT: ...
-        input.readLine();
-        // linha com: DIMENSION: ...
-        String linha = input.readLine();
-        String[] item = linha.split(" ");
-        int n = Integer.parseInt(item[1]); // número com a dimensão da instância
-        // linha com: EDGE_WEIGHT_TYPE: ...
-        input.readLine();
-        // linha com: EDGE_WEIGHT_FORMAT: ...
-        input.readLine();
-        // linha com: EDGE_WEIGHT_SECTION
-        input.readLine();
-
-        int[][] distancia = new int[n][n];
-
-        // o código a seguir precisa ser corrigido para fazer a leitura com mais espaços entre os números
-        String numeros = "";
-        while (!(linha = input.readLine()).equals("EOF")) {
-            numeros += " " + linha.trim();
-        }
-        numeros = numeros.trim();
-
-        item = numeros.split(" ");
-        int k = 0;
+        TSPInstance instancia = new TSPInstance(new File(args[0]));
+        int n = instancia.getDimension();
+        double[][] distancia = new double[n][n];
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j <= i; j++) {
-                int dist = Integer.parseInt(item[k]);
-                k++;
-                distancia[i][j] = dist;
-                distancia[j][i] = dist;
+            for (int j = 0; j < n; j++) {
+                distancia[i][j] = instancia.getDistanceTable().getDistanceBetween(i + 1, j + 1);
             }
         }
+        
+//        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+//        // linha com: NAME: ...
+//        input.readLine();
+//        // linha com: TYPE: ...
+//        input.readLine();
+//        // linha com: COMMENT: ...
+//        input.readLine();
+//        // linha com: DIMENSION: ...
+//        String linha = input.readLine();
+//        String[] item = linha.split(" ");
+//        int n = Integer.parseInt(item[1]); // número com a dimensão da instância
+//        // linha com: EDGE_WEIGHT_TYPE: ...
+//        input.readLine();
+//        // linha com: EDGE_WEIGHT_FORMAT: ...
+//        input.readLine();
+//        // linha com: EDGE_WEIGHT_SECTION
+//        input.readLine();
+//
+//        int[][] distancia = new int[n][n];
+//
+//        // o código a seguir precisa ser corrigido para fazer a leitura com mais espaços entre os números
+//        String numeros = "";
+//        while (!(linha = input.readLine()).equals("EOF")) {
+//            numeros += " " + linha.trim();
+//        }
+//        numeros = numeros.trim();
+//
+//        item = numeros.split(" ");
+//        int k = 0;
+//        for (int i = 0; i < n; i++) {
+//            for (int j = 0; j <= i; j++) {
+//                int dist = Integer.parseInt(item[k]);
+//                k++;
+//                distancia[i][j] = dist;
+//                distancia[j][i] = dist;
+//            }
+//        }
 
         int[] solucao;
         // resolver o problema
         char opcaoMetaheuristica = 'I';
-        if (args.length >= 1)
-            opcaoMetaheuristica = args[0].charAt(0); // I=ILS;G=GRASP
+        if (args.length >= 2)
+            opcaoMetaheuristica = args[1].charAt(0); // I=ILS;G=GRASP
         
         char opcaoConstrutivo = 'P';
-        if (args.length >= 2)
-            opcaoConstrutivo = args[1].charAt(0); // P="Vizinho mais próximo";A="Aleatório"
+        if (args.length >= 3)
+            opcaoConstrutivo = args[2].charAt(0); // P="Vizinho mais próximo";A="Aleatório"
+        
+        char opcaoVizinhanca = '2';
+        if (args.length >= 4)
+            opcaoVizinhanca = args[3].charAt(0); // 2="2-Opt";I="Insertion";S="Swap-2"
         
         char opcaoAprimorante = 'P';
-        if (args.length >= 3)
-            opcaoAprimorante = args[2].charAt(0); // P="Primeiro aprimorante";M="Melhor aprimorante"
+        if (args.length >= 5)
+            opcaoAprimorante = args[4].charAt(0); // P="Primeiro aprimorante";M="Melhor aprimorante"
             
         char opcaoAcompanhamento = 'A';
-        if (args.length >= 4)
-            opcaoAcompanhamento = args[3].charAt(0); // A="Imprimir acompanhamento";N="Não imprimir acompanhamento"
+        if (args.length >= 6)
+            opcaoAcompanhamento = args[5].charAt(0); // A="Imprimir acompanhamento";N="Não imprimir acompanhamento"
             
         if (opcaoAcompanhamento == 'A')
                 imprimirAcompanhamento = true;
         
         int iteracoes = 30;
-        if (args.length >= 5)
-            iteracoes = Integer.parseInt(args[4]);
+        if (args.length >= 7)
+            iteracoes = Integer.parseInt(args[6]);
 
         double taxaAleatoriedade = 0;
-        if (args.length >= 6)
-            taxaAleatoriedade = Integer.parseInt(args[5]) / 100.0;
+        if (args.length >= 8)
+            taxaAleatoriedade = Integer.parseInt(args[7]) / 100.0;
         
         long tempoInicial = System.nanoTime();
         solucao = resolverCaixeiroViajante(n, distancia, opcaoConstrutivo, 
-                    opcaoAprimorante, opcaoMetaheuristica, iteracoes,
-                    taxaAleatoriedade);
+                    opcaoVizinhanca, opcaoAprimorante, opcaoMetaheuristica, 
+                    iteracoes, taxaAleatoriedade);
         long tempoFinal = System.nanoTime();
 
         // imprimir resultado
@@ -110,8 +133,8 @@ public class CaixeiroViajante {
         System.out.printf("\nTempo de execução...............: %15.3f s\n\n", (tempoFinal - tempoInicial) / 1000000000.0);
     }
 
-    private static void obterListaDeVizinhosNaoVisitadosOrdenadaPorProximidade(int[] listaCandidatos, int origem, int[][] distancia, boolean[] visitado) {
-        int[] distanciaOrigem = new int[listaCandidatos.length];
+    private static void obterListaDeVizinhosNaoVisitadosOrdenadaPorProximidade(int[] listaCandidatos, int origem, double[][] distancia, boolean[] visitado) {
+        double[] distanciaOrigem = new double[listaCandidatos.length];
         int tamanhoLista = 0;
         for (int i = 0; i < listaCandidatos.length; i++) {
             if (i != origem && !visitado[i]) {
@@ -123,7 +146,7 @@ public class CaixeiroViajante {
         
         // ordenar lista por distâncias crescentes (ordenação por seleção)
         for (int i = 0; i < tamanhoLista - 1; i++) {
-            int menorDistancia = distanciaOrigem[i];
+            double menorDistancia = distanciaOrigem[i];
             int indMenorDistancia = i;
             for (int j = i + 1; j < tamanhoLista; j++) {
                 if (distanciaOrigem[j] < menorDistancia) {
@@ -131,7 +154,7 @@ public class CaixeiroViajante {
                     indMenorDistancia = j;
                 }
             }
-            int tempDistancia = distanciaOrigem[i];
+            double tempDistancia = distanciaOrigem[i];
             int tempCandidato = listaCandidatos[i];
             distanciaOrigem[i] = distanciaOrigem[indMenorDistancia];
             listaCandidatos[i] = listaCandidatos[indMenorDistancia];
@@ -150,12 +173,25 @@ public class CaixeiroViajante {
     }
     
 
-    private static int[] resolverCaixeiroViajante(int n, int[][] distancia,
-            char construtivo, char opcaoAprimorante, char opcaoMetaheuristica,
-            int numIteracoes, double taxaAleatoriedade) {
+    private static int[] resolverCaixeiroViajante(int n, double[][] distancia,
+            char construtivo, char opcaoVizinhanca, char opcaoAprimorante, 
+            char opcaoMetaheuristica, int numIteracoes, double taxaAleatoriedade) {
         // prepara tela para acompanhamento
+        String vizinhanca = "";
+        switch (opcaoVizinhanca) {
+            case '2':
+                vizinhanca = "2-Opt";
+                break;
+            case 'I':
+                vizinhanca = "Insertion";
+                break;
+            case 'S':
+                vizinhanca = "Swap-2";
+                break;
+        }
         if (imprimirAcompanhamento) {
-            InterfaceTerminal.prepararTelaAcompanhamento(construtivo, "2-Opt", opcaoAprimorante, opcaoMetaheuristica);
+            InterfaceTerminal.prepararTelaAcompanhamento(construtivo, vizinhanca, 
+                    opcaoAprimorante, opcaoMetaheuristica);
         }
 
         int[] solucao = new int[n];
@@ -186,12 +222,12 @@ public class CaixeiroViajante {
             case 'G':
                 executarGRASP(numIteracoes, taxaAleatoriedade, solucaoGlobal, 
                         n, solucao, solucaoBusca, solucaoMelhor, 
-                        distancia, opcaoAprimorante);
+                        distancia, opcaoVizinhanca, opcaoAprimorante);
                 break;
             case 'I':
                 executarILS(solucaoGlobal, n, solucao, solucaoBusca, 
-                        solucaoMelhor, distancia, opcaoAprimorante,
-                        numIteracoes);
+                        solucaoMelhor, distancia, construtivo, opcaoVizinhanca,
+                        opcaoAprimorante, numIteracoes);
                 break;
         }
 
@@ -203,15 +239,24 @@ public class CaixeiroViajante {
     
     private static void executarILS(int[] solucaoILS,
             int n, int[] solucao, int[] solucaoBusca, int[] solucaoMelhor, 
-            int[][] distancia, char opcaoAprimorante, int numIteracoes) {
-        gerarSolucaoGulosa(n, solucao, distancia, 
-                HeuristicaConstrutiva.VizinhoMaisProximo);
-        totalSolucoesAvaliadas++;
+            double[][] distancia, char construtivo, char opcaoVizinhanca, 
+            char opcaoAprimorante, int numIteracoes) {
+        switch (construtivo) {
+            case 'P':
+                gerarSolucaoGulosa(n, solucao, distancia, 
+                        HeuristicaConstrutiva.VizinhoMaisProximo);
+                totalSolucoesAvaliadas++;
+                break;
+            case 'A':
+                gerarSolucaoAleatoria(n, solucao);
+                totalSolucoesAvaliadas++;
+                break;
+        }
         if (imprimirAcompanhamento)
             InterfaceTerminal.imprimirSolucao(TipoSolucao.SolucaoInicial, n, 
                     solucao, distancia);
-        executarBuscaLocalHillClimbing(n, solucao, solucaoBusca, 
-                solucaoILS, distancia, opcaoAprimorante);
+        executarBuscaLocal(n, solucao, solucaoBusca, solucaoILS, distancia, 
+                opcaoVizinhanca, opcaoAprimorante);
         
         if (imprimirAcompanhamento) {
             InterfaceTerminal.imprimirSolucao(TipoSolucao.MelhorSolucaoLocal, n, 
@@ -230,8 +275,8 @@ public class CaixeiroViajante {
                 InterfaceTerminal.imprimirSolucao(TipoSolucao.SolucaoInicial, n, 
                         solucao, distancia);
 
-            executarBuscaLocalHillClimbing(n, solucao, solucaoBusca, 
-                    solucaoMelhor, distancia, opcaoAprimorante);
+            executarBuscaLocal(n, solucao, solucaoBusca, solucaoMelhor, 
+                    distancia, opcaoVizinhanca, opcaoAprimorante);
             
             if (imprimirAcompanhamento)
                 InterfaceTerminal.imprimirSolucao(TipoSolucao.MelhorSolucaoLocal, n, 
@@ -300,9 +345,9 @@ public class CaixeiroViajante {
     private static void executarGRASP(int quantidadeIteracoes,
             double taxaAleatoriedade, int[] solucaoGRASP,
             int n, int[] solucao, int[] solucaoBusca, int[] solucaoMelhor, 
-            int[][] distancia, char opcaoAprimorante) {
+            double[][] distancia, char opcaoVizinhanca, char opcaoAprimorante) {
         
-        int custoSolucaoGRASP = 0;
+        double custoSolucaoGRASP = 0;
         
         for (int i = 0; i < quantidadeIteracoes; i++) {
             gerarSolucaoGulosaAleatoria(n, solucao, distancia, 
@@ -312,8 +357,8 @@ public class CaixeiroViajante {
                 InterfaceTerminal.imprimirSolucao(TipoSolucao.SolucaoInicial, n,
                         solucao, distancia);
             
-            executarBuscaLocalHillClimbing(n, solucao, solucaoBusca, 
-                    solucaoMelhor, distancia, opcaoAprimorante);
+            executarBuscaLocal(n, solucao, solucaoBusca, solucaoMelhor, 
+                    distancia, opcaoVizinhanca, opcaoAprimorante);
             if (i == 0) {
                 System.arraycopy(solucaoMelhor, 0, solucaoGRASP, 0, n);
                 custoSolucaoGRASP = calcularCustoSolucao(n, solucaoGRASP, distancia);
@@ -340,15 +385,35 @@ public class CaixeiroViajante {
         }
     }
 
-    private static void executarBuscaLocalHillClimbing(int n, int[] solucao,
-            int[] solucaoBusca, int[] solucaoMelhor, int[][] distancia,
-            char opcaoAprimorante) {
+    private static void executarSimulatedAnnealing(int quantidadeIteracoes,
+            int[] solucaoSimulatedAnnealing, int n, int[] solucao, 
+            int[] solucaoBusca, int[] solucaoMelhor, double[][] distancia) {
+        
+    }
+
+    private static void executarBuscaLocal(int n, int[] solucao,
+            int[] solucaoBusca, int[] solucaoMelhor, double[][] distancia,
+            char opcaoVizinhanca, char opcaoAprimorante) {
         totalSolucoesBuscaLocal = 0;
         boolean houveMelhoria;
         int iteracoes = 0;
         do {
-            houveMelhoria = buscaEmVizinhanca2opt(n, solucao, solucaoBusca,
-                    solucaoMelhor, distancia, opcaoAprimorante);
+            switch (opcaoVizinhanca) {
+                case '2':
+                    houveMelhoria = buscaEmVizinhanca2opt(n, solucao, solucaoBusca,
+                            solucaoMelhor, distancia, opcaoAprimorante);
+                    break;
+                case 'I':
+                    houveMelhoria = buscaEmVizinhancaInsert(n, solucao, solucaoBusca,
+                            solucaoMelhor, distancia, opcaoAprimorante);
+                    break;
+                case 'S':
+                    houveMelhoria = buscaEmVizinhancaSwap(n, solucao, solucaoBusca,
+                            solucaoMelhor, distancia, opcaoAprimorante);
+                    break;
+                default:
+                    houveMelhoria = false;
+            }
 
             if (houveMelhoria) {
                 if (imprimirAcompanhamento)
@@ -368,8 +433,8 @@ public class CaixeiroViajante {
             InterfaceTerminal.imprimirSolucao(TipoSolucao.MelhorSolucaoLocal, n, solucaoMelhor, distancia);
     }
 
-    public static int calcularCustoSolucao(int n, int[] solucao, int[][] distancia) {
-        int custo = 0;
+    public static double calcularCustoSolucao(int n, int[] solucao, double[][] distancia) {
+        double custo = 0;
         for (int i = 1; i < n; i++) {
             int indiceCidadeAnterior = solucao[i - 1];
             int indiceCidadeAtual = solucao[i];
@@ -382,7 +447,7 @@ public class CaixeiroViajante {
         return custo;
     }
 
-    private static void gerarSolucaoAleatoria(int n, int[] solucao, int[][] distancia) {
+    private static void gerarSolucaoAleatoria(int n, int[] solucao) {
         Random r = new Random(Calendar.getInstance().getTimeInMillis());
         boolean[] visitado = new boolean[n];
         for (int i = 0; i < n; i++) {
@@ -401,7 +466,7 @@ public class CaixeiroViajante {
     }
     
     private static void gerarSolucaoGulosaAleatoria(int n, int[] solucao,
-            int[][] distancia, HeuristicaConstrutiva heuristica,
+            double[][] distancia, HeuristicaConstrutiva heuristica,
             double taxaDeAleatoriedade) {
         // implementar o método como sugerido no GRASP
         Random r = new Random(Calendar.getInstance().getTimeInMillis());
@@ -437,7 +502,7 @@ public class CaixeiroViajante {
     }
 
     private static void gerarSolucaoGulosa(int n, int[] solucao,
-            int[][] distancia, HeuristicaConstrutiva heuristica) {
+            double[][] distancia, HeuristicaConstrutiva heuristica) {
         boolean[] visitado = new boolean[n];
         int indiceUltimaCidadeVisitada = -1;
         for (int i = 0; i < n; i++) {
@@ -462,9 +527,9 @@ public class CaixeiroViajante {
     }
 
     private static int obterCidadeMaisProximaNaoVisitada(int indiceCidadeOrigem,
-            int n, int[][] distancia, boolean[] visitado) {
+            int n, double[][] distancia, boolean[] visitado) {
         int indiceProximaCidade = -1;
-        int menorDistancia = Integer.MAX_VALUE;
+        double menorDistancia = Double.MAX_VALUE;
 
         for (int i = 0; i < n; i++) {
             if (!visitado[i]) {
@@ -479,11 +544,11 @@ public class CaixeiroViajante {
     }
 
     private static boolean buscaEmVizinhanca2opt(int n, int[] solucaoBasica,
-            int[] solucaoVizinha, int[] solucaoMelhorVizinha, int[][] distancia,
+            int[] solucaoVizinha, int[] solucaoMelhorVizinha, double[][] distancia,
             char opcaoAprimorante) {
         boolean houveMelhoria = false;
         int numVizinhos = 0;
-        int custoMelhorSolucao = calcularCustoSolucao(n, solucaoBasica, distancia);
+        double custoMelhorSolucao = calcularCustoSolucao(n, solucaoBasica, distancia);
         
         if (imprimirAcompanhamento)
             InterfaceTerminal.imprimirSolucao(TipoSolucao.SolucaoBaseVizinhanca, n, solucaoBasica, distancia);
@@ -532,7 +597,7 @@ public class CaixeiroViajante {
                 if (imprimirAcompanhamento)
                     InterfaceTerminal.imprimirQuantidadeSolucoesVizinhas(numVizinhos);
 
-                int custoSolucaoVizinha = calcularCustoSolucao(n, solucaoVizinha, distancia);
+                double custoSolucaoVizinha = calcularCustoSolucao(n, solucaoVizinha, distancia);
                 if (custoSolucaoVizinha < custoMelhorSolucao) {
                     System.arraycopy(solucaoVizinha, 0, solucaoMelhorVizinha, 0, n);
                     
@@ -554,6 +619,179 @@ public class CaixeiroViajante {
         totalSolucoesBuscaLocal += numVizinhos;
 
         return houveMelhoria;
+    }
+
+    /**
+     * A ser implementada. Este método faz a busca na vizinhança com estrutura
+     * definida pela inserção de uma visita a uma cidade em outro ponto da rota.
+     * @param n
+     * @param solucaoBasica
+     * @param solucaoVizinha
+     * @param solucaoMelhorVizinha
+     * @param distancia
+     * @param opcaoAprimorante
+     * @return 
+     */
+    private static boolean buscaEmVizinhancaInsert(int n, int[] solucaoBasica,
+            int[] solucaoVizinha, int[] solucaoMelhorVizinha, double[][] distancia,
+            char opcaoAprimorante) {
+        boolean houveMelhoria = false;
+        int numVizinhos = 0;
+        double custoMelhorSolucao = calcularCustoSolucao(n, solucaoBasica, distancia);
+        
+        if (imprimirAcompanhamento)
+            InterfaceTerminal.imprimirSolucao(TipoSolucao.SolucaoBaseVizinhanca, n, solucaoBasica, distancia);
+
+        loopExterno:
+        for (int i = 0; i < n; i++) {
+            int cidadeI = solucaoBasica[i];
+            for (int j = 0; j < n; j++) {
+                System.arraycopy(solucaoBasica, 0, solucaoVizinha, 0, n);
+                if (j == i || j == i - 1) // j == i - 1 é para evitar testar soluções idênticas a outras já testadas
+                    continue;
+                if (j < i) {
+                    for (int k = i; k > j; k--)
+                        solucaoVizinha[k] = solucaoVizinha[k - 1];
+                } else {
+                    for (int k = i; k < j; k++)
+                        solucaoVizinha[k] = solucaoVizinha[k + 1];
+                }
+                solucaoVizinha[j] = cidadeI;
+                // para teste: imprimir cada solução vizinha
+                if (imprimirAcompanhamento)
+                    InterfaceTerminal.imprimirSolucao(TipoSolucao.UltimaSolucaoVizinha, n, solucaoVizinha, distancia);
+    
+                numVizinhos++;
+                
+                if (imprimirAcompanhamento)
+                    InterfaceTerminal.imprimirQuantidadeSolucoesVizinhas(numVizinhos);
+
+                double custoSolucaoVizinha = calcularCustoSolucao(n, solucaoVizinha, distancia);
+                if (custoSolucaoVizinha < custoMelhorSolucao) {
+                    System.arraycopy(solucaoVizinha, 0, solucaoMelhorVizinha, 0, n);
+                    
+                    if (imprimirAcompanhamento)
+                        InterfaceTerminal.imprimirSolucao(TipoSolucao.MelhorSolucaoVizinhanca, n, solucaoMelhorVizinha, distancia);
+    
+                    custoMelhorSolucao = custoSolucaoVizinha;
+                    houveMelhoria = true;
+
+                    if (opcaoAprimorante == 'P') {
+                        // se encontrou vizinho melhor, terminou a busca nesta vizinhança
+                        break loopExterno;
+                    }
+                }
+            }
+        }
+        //System.out.println("\nNúmero de vizinhos: " + numVizinhos);
+        totalSolucoesAvaliadas += numVizinhos;
+        totalSolucoesBuscaLocal += numVizinhos;
+
+        return houveMelhoria;
+    }
+
+    /**
+     * A ser implementada!
+     * @param n
+     * @param solucaoBasica
+     * @param solucaoVizinha
+     * @param solucaoMelhorVizinha
+     * @param distancia
+     * @param opcaoAprimorante
+     * @return 
+     */
+    private static boolean buscaEmVizinhancaSwap(int n, int[] solucaoBasica,
+            int[] solucaoVizinha, int[] solucaoMelhorVizinha, double[][] distancia,
+            char opcaoAprimorante) {
+        boolean houveMelhoria = false;
+        int numVizinhos = 0;
+        double custoMelhorSolucao = calcularCustoSolucao(n, solucaoBasica, distancia);
+        
+        if (imprimirAcompanhamento)
+            InterfaceTerminal.imprimirSolucao(TipoSolucao.SolucaoBaseVizinhanca, n, solucaoBasica, distancia);
+
+        loopExterno:
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i; j < n; j++) {
+                System.arraycopy(solucaoBasica, 0, solucaoVizinha, 0, n);
+                solucaoVizinha[i] = solucaoBasica[j];
+                solucaoVizinha[j] = solucaoBasica[i];
+                // para teste: imprimir cada solução vizinha
+                if (imprimirAcompanhamento)
+                    InterfaceTerminal.imprimirSolucao(TipoSolucao.UltimaSolucaoVizinha, n, solucaoVizinha, distancia);
+    
+                numVizinhos++;
+                
+                if (imprimirAcompanhamento)
+                    InterfaceTerminal.imprimirQuantidadeSolucoesVizinhas(numVizinhos);
+
+                double custoSolucaoVizinha = calcularCustoSolucao(n, solucaoVizinha, distancia);
+                if (custoSolucaoVizinha < custoMelhorSolucao) {
+                    System.arraycopy(solucaoVizinha, 0, solucaoMelhorVizinha, 0, n);
+                    
+                    if (imprimirAcompanhamento)
+                        InterfaceTerminal.imprimirSolucao(TipoSolucao.MelhorSolucaoVizinhanca, n, solucaoMelhorVizinha, distancia);
+    
+                    custoMelhorSolucao = custoSolucaoVizinha;
+                    houveMelhoria = true;
+
+                    if (opcaoAprimorante == 'P') {
+                        // se encontrou vizinho melhor, terminou a busca nesta vizinhança
+                        break loopExterno;
+                    }
+                }
+            }
+        }
+        //System.out.println("\nNúmero de vizinhos: " + numVizinhos);
+        totalSolucoesAvaliadas += numVizinhos;
+        totalSolucoesBuscaLocal += numVizinhos;
+
+        return houveMelhoria;
+    }
+
+    private static void geraSolucaoAleatoriaEmVizinhanca2opt(int n, 
+            int[] solucaoBasica, int[] solucaoVizinha, double[][] distancia,
+            Random geradorAleatorio) {
+        
+        if (imprimirAcompanhamento)
+            InterfaceTerminal.imprimirSolucao(TipoSolucao.SolucaoBaseVizinhanca, n, solucaoBasica, distancia);
+
+        int origemI = geradorAleatorio.nextInt(n);
+        int destinoI = (origemI == n - 1) ? 0 : origemI + 1;
+        int j = geradorAleatorio.nextInt(n - 3) + 1;
+        int origemJ = (origemI + j + 1) % n;
+        int destinoJ = (origemI + j + 2) % n;
+
+        int k = 0;
+        solucaoVizinha[k] = solucaoBasica[origemI];
+        k++;
+        solucaoVizinha[k] = solucaoBasica[origemJ];
+        k++;
+        if (origemJ > destinoI) {
+            for (int l = origemJ - 1; l >= destinoI; l--) {
+                solucaoVizinha[k] = solucaoBasica[l];
+                k++;
+            }
+        } else {
+            for (int l = origemJ - 1; l >= 0; l--) {
+                solucaoVizinha[k] = solucaoBasica[l];
+                k++;
+            }
+            for (int l = n - 1; l >= destinoI; l--) {
+                solucaoVizinha[k] = solucaoBasica[l];
+                k++;
+            }
+        }
+        solucaoVizinha[k] = solucaoBasica[destinoJ];
+        k++;
+        int quantCidadesEntreDestinoJeOrigemI = n - k;
+        for (int l = 1; l <= quantCidadesEntreDestinoJeOrigemI; l++) {
+            solucaoVizinha[k] = solucaoBasica[(destinoJ + l) % n];
+            k++;
+        }
+        // para teste: imprimir cada solução vizinha
+        if (imprimirAcompanhamento)
+            InterfaceTerminal.imprimirSolucao(TipoSolucao.UltimaSolucaoVizinha, n, solucaoVizinha, distancia);
     }
 
 }

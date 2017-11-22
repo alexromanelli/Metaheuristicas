@@ -1,0 +1,17 @@
+
+META-HEURÍSTICAS
+----------------
+
+
+Trabalho:
+
+Implementar programa que soluciona o problema do caixeiro viajante usando as seguintes meta-heurísticas:
+
+a) Algoritmos Genéticos;
+
+b) Simulated Annealing;
+
+c) VNS;
+
+d) GRASP com Path Relinking.
+

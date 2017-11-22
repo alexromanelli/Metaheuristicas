@@ -27,85 +27,85 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        jPanelSolucaoBaseVizinhanca = new javax.swing.JPanel();
+        jPanelUltimaVizinhaGerada = new javax.swing.JPanel();
+        jPanelOtimoLocal = new javax.swing.JPanel();
+        jPanelOtimoGlobal = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextFieldInstancia = new javax.swing.JTextField();
+        jButtonAbrirInstancia = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxMetodo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldTaxaAleatoriedade = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldQuantidadeIteracoes = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxOpcaoAprimoramento = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        jComboBoxMetodoConstrutivo = new javax.swing.JComboBox<>();
+        jButtonExecutarBusca = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBoxExibirAcompanhamentoOtimoGlobal = new javax.swing.JCheckBox();
+        jCheckBoxExibirAcompanhamentoOtimoLocal = new javax.swing.JCheckBox();
+        jCheckBoxExibirAcompanhamentoUltimaSolucaoVizinha = new javax.swing.JCheckBox();
+        jCheckBoxExibirAcompanhamentoBaseVizinhanca = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Solução base da vizinhança"));
+        jPanelSolucaoBaseVizinhanca.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Solução base da vizinhança"));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelSolucaoBaseVizinhancaLayout = new javax.swing.GroupLayout(jPanelSolucaoBaseVizinhanca);
+        jPanelSolucaoBaseVizinhanca.setLayout(jPanelSolucaoBaseVizinhancaLayout);
+        jPanelSolucaoBaseVizinhancaLayout.setHorizontalGroup(
+            jPanelSolucaoBaseVizinhancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 476, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelSolucaoBaseVizinhancaLayout.setVerticalGroup(
+            jPanelSolucaoBaseVizinhancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Última solução vizinha gerada"));
+        jPanelUltimaVizinhaGerada.setBorder(javax.swing.BorderFactory.createTitledBorder("Última solução vizinha gerada"));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelUltimaVizinhaGeradaLayout = new javax.swing.GroupLayout(jPanelUltimaVizinhaGerada);
+        jPanelUltimaVizinhaGerada.setLayout(jPanelUltimaVizinhaGeradaLayout);
+        jPanelUltimaVizinhaGeradaLayout.setHorizontalGroup(
+            jPanelUltimaVizinhaGeradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 472, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelUltimaVizinhaGeradaLayout.setVerticalGroup(
+            jPanelUltimaVizinhaGeradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Ótimo local"));
+        jPanelOtimoLocal.setBorder(javax.swing.BorderFactory.createTitledBorder("Ótimo local"));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelOtimoLocalLayout = new javax.swing.GroupLayout(jPanelOtimoLocal);
+        jPanelOtimoLocal.setLayout(jPanelOtimoLocalLayout);
+        jPanelOtimoLocalLayout.setHorizontalGroup(
+            jPanelOtimoLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 472, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+        jPanelOtimoLocalLayout.setVerticalGroup(
+            jPanelOtimoLocalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Ótimo global"));
-        jPanel7.setPreferredSize(new java.awt.Dimension(500, 650));
+        jPanelOtimoGlobal.setBorder(javax.swing.BorderFactory.createTitledBorder("Ótimo global"));
+        jPanelOtimoGlobal.setPreferredSize(new java.awt.Dimension(500, 650));
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelOtimoGlobalLayout = new javax.swing.GroupLayout(jPanelOtimoGlobal);
+        jPanelOtimoGlobal.setLayout(jPanelOtimoGlobalLayout);
+        jPanelOtimoGlobalLayout.setHorizontalGroup(
+            jPanelOtimoGlobalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 472, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+        jPanelOtimoGlobalLayout.setVerticalGroup(
+            jPanelOtimoGlobalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -114,37 +114,39 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelSolucaoBaseVizinhanca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelUltimaVizinhaGerada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelOtimoLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelOtimoGlobal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelSolucaoBaseVizinhanca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelUltimaVizinhaGerada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelOtimoLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelOtimoGlobal, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jScrollPane1.setViewportView(jPanel5);
 
         jLabel1.setText("Instância:");
 
-        jButton1.setText("Abrir");
+        jTextFieldInstancia.setEditable(false);
+        jTextFieldInstancia.setToolTipText("Clique em \"Abrir\" para selecionar um arquivo");
+
+        jButtonAbrirInstancia.setText("Abrir");
 
         jLabel3.setText("Método:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GRASP", "ILS", "VNS", "Algoritmo Genético", "Busca Tabu" }));
+        jComboBoxMetodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GRASP", "ILS", "VNS", "Algoritmo Genético", "Busca Tabu" }));
 
         jLabel4.setText("Taxa de aleatoriedade:");
 
@@ -152,13 +154,13 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
 
         jLabel6.setText("Opção de aprimoramento:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primeiro aprimorante", "Melhor aprimorante" }));
+        jComboBoxOpcaoAprimoramento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primeiro aprimorante", "Melhor aprimorante" }));
 
         jLabel7.setText("Método construtivo:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aleatório", "Heurística construtiva do vizinho mais próximo", "Guloso Aleatório (Vizinho mais próximo)" }));
+        jComboBoxMetodoConstrutivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aleatório", "Heurística construtiva do vizinho mais próximo", "Guloso Aleatório (Vizinho mais próximo)" }));
 
-        jButton2.setText("Executar busca");
+        jButtonExecutarBusca.setText("Executar busca");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -173,26 +175,26 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldInstancia, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonAbrirInstancia)
                         .addGap(82, 82, 82)
                         .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(202, 202, 202)
                         .addComponent(jLabel5))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxMetodoConstrutivo, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTaxaAleatoriedade, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldQuantidadeIteracoes, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxOpcaoAprimoramento, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(jButtonExecutarBusca)
                 .addContainerGap(282, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -203,34 +205,34 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
+                            .addComponent(jTextFieldInstancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAbrirInstancia)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldTaxaAleatoriedade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldQuantidadeIteracoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxOpcaoAprimoramento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxMetodoConstrutivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonExecutarBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jCheckBox1.setText("Ótimo global");
+        jCheckBoxExibirAcompanhamentoOtimoGlobal.setText("Ótimo global");
 
-        jCheckBox2.setText("Ótimo local");
+        jCheckBoxExibirAcompanhamentoOtimoLocal.setText("Ótimo local");
 
-        jCheckBox3.setText("Última solução vizinha");
+        jCheckBoxExibirAcompanhamentoUltimaSolucaoVizinha.setText("Última solução vizinha");
 
-        jCheckBox4.setText("Base da vizinhança");
+        jCheckBoxExibirAcompanhamentoBaseVizinhanca.setText("Base da vizinhança");
 
         jLabel2.setText("Exibir acompanhamento:");
 
@@ -243,10 +245,10 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox4))
+                    .addComponent(jCheckBoxExibirAcompanhamentoUltimaSolucaoVizinha)
+                    .addComponent(jCheckBoxExibirAcompanhamentoOtimoGlobal)
+                    .addComponent(jCheckBoxExibirAcompanhamentoOtimoLocal)
+                    .addComponent(jCheckBoxExibirAcompanhamentoBaseVizinhanca))
                 .addGap(16, 16, 16))
         );
         jPanel6Layout.setVerticalGroup(
@@ -254,14 +256,14 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox4)
+                    .addComponent(jCheckBoxExibirAcompanhamentoBaseVizinhanca)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox3)
+                .addComponent(jCheckBoxExibirAcompanhamentoUltimaSolucaoVizinha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox2)
+                .addComponent(jCheckBoxExibirAcompanhamentoOtimoLocal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(jCheckBoxExibirAcompanhamentoOtimoGlobal)
                 .addGap(9, 9, 9))
         );
 
@@ -330,15 +332,15 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton jButtonAbrirInstancia;
+    private javax.swing.JButton jButtonExecutarBusca;
+    private javax.swing.JCheckBox jCheckBoxExibirAcompanhamentoBaseVizinhanca;
+    private javax.swing.JCheckBox jCheckBoxExibirAcompanhamentoOtimoGlobal;
+    private javax.swing.JCheckBox jCheckBoxExibirAcompanhamentoOtimoLocal;
+    private javax.swing.JCheckBox jCheckBoxExibirAcompanhamentoUltimaSolucaoVizinha;
+    private javax.swing.JComboBox<String> jComboBoxMetodo;
+    private javax.swing.JComboBox<String> jComboBoxMetodoConstrutivo;
+    private javax.swing.JComboBox<String> jComboBoxOpcaoAprimoramento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -347,15 +349,15 @@ public class JFrameTelaAcompanhamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanelOtimoGlobal;
+    private javax.swing.JPanel jPanelOtimoLocal;
+    private javax.swing.JPanel jPanelSolucaoBaseVizinhanca;
+    private javax.swing.JPanel jPanelUltimaVizinhaGerada;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldInstancia;
+    private javax.swing.JTextField jTextFieldQuantidadeIteracoes;
+    private javax.swing.JTextField jTextFieldTaxaAleatoriedade;
     // End of variables declaration//GEN-END:variables
 }
